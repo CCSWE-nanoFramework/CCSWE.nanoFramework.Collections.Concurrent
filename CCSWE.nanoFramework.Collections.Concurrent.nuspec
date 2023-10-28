@@ -14,7 +14,7 @@
 		<description>Simple thread-safe collections.</description>
 		<repository type="git" url="https://github.com/CoryCharlton/CCSWE.nanoFramework.Collections.Concurrent" commit="$commit$"/>
 		<copyright>Copyright (c) Cory Charlton</copyright>
-		<tags>nanoFramework C# csharp netmf netnf ccswe mediator</tags>
+		<tags>nanoFramework C# csharp netmf netnf ccswe collections concurrent thread</tags>
 		<dependencies>
 			<dependency id="nanoFramework.CoreLibrary" version="1.14.2"/>
 			<dependency id="nanoFramework.System.Collections" version="1.5.18"/>
