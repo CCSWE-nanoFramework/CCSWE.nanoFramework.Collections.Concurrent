@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 namespace CCSWE.nanoFramework.Collections.Concurrent
 {
+    // TODO: I might want to move most of this logic to a base class so creating strongly typed variants is trivial
+
     /// <summary>
     /// A thread-safe implementation of a queue.
     /// </summary>
@@ -89,6 +92,11 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         /// <returns>true if obj is found in the ConcurrentQueue; otherwise, false.</returns>
         public bool Contains(object item)
         {
+            if (item is null)
+            {
+                return false;
+            }
+
             lock (_lock)
             {
                 return _queue.Contains(item);
@@ -122,8 +130,11 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
 
         /// <summary>Adds an object to the end of the ConcurrentQueue.</summary>
         /// <param name="item">The object to add to the ConcurrentQueue.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Enqueue(object item)
         {
+            Ensure.IsNotNull(nameof(item), item);
+
             lock (_lock)
             {
                 _queue.Enqueue(item);
