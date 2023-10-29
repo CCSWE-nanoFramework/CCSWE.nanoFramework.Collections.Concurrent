@@ -21,4 +21,5 @@ jobs:
     uses: nanoframework/nf-tools/.github/workflows/update-dependencies.yml@main
     secrets: inherit
     with:
+      repoOwner: 'CoryCharlton'
       solutionsToCheck: 'CCSWE.nanoFramework.Collections.Concurrent.sln'
