@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Ac
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\nf-build-and-publish.yml = .github\workflows\nf-build-and-publish.yml
 		.github\workflows\nf-update-dependencies.yml = .github\workflows\nf-update-dependencies.yml
-		.github\workflows\update-dependencies.yml = .github\workflows\update-dependencies.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{2D183775-1C9F-463C-908B-5765BC2BFFA3}"
