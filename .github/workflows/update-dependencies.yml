@@ -1,0 +1,62 @@
+# Copyright (c) .NET Foundation and Contributors
+# See LICENSE file in the project root for full license information.
+
+name: Daily update dependencies
+
+on: 
+  schedule:
+  # At 00:00 UTC every day.
+  - cron:  '0 0 * * 0'
+  
+  repository_dispatch:
+    types: update-dependencies
+
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  update-nanoframework-nugets:
+    name: Update .NET nanoFramework NuGet packages
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    runs-on: windows-latest
+
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_AUTH_TOKEN: ${{ secrets.NANOBUILD_PAT }}
+      GITHUB_AUTH: ${{ secrets.NFBOT_GITHUB_ACTIONS }}
+      SOLUTION: 'CCSWE.nanoFramework.Collections.Concurrent.sln'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: '${{ github.workspace }}/${{ inputs.workingDirectory }}'
+          ref: ${{ inputs.branchToPr }}
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - uses: nanoframework/nanobuild@v1
+        name: Install .NET nanoFramework build components
+
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '>=6.2'
+
+      - name: Update dependencies
+        uses: nanoframework/nanodu@v1
+        with:
+          solutionsToCheck: ${{ env.SOLUTION }}
+          workingDirectory: '${{ github.workspace }}/${{ inputs.workingDirectory }}'
+          exclusionList: ${{ inputs.exclusionList }}
+          branchToPr: ${{ inputs.branchToPr }}
+          nugetConfig: '${{ inputs.nugetConfig }}'
+          githubAuth: ${{ env.GITHUB_AUTH }}
+          repoOwner: ${{ inputs.repoOwner }}
