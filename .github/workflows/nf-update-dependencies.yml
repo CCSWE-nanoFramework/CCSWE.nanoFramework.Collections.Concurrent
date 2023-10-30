@@ -22,3 +22,4 @@ jobs:
     secrets: inherit
     with:
       solutionsToCheck: 'CCSWE.nanoFramework.Collections.Concurrent.sln'
+      branchToPr: 'master'
