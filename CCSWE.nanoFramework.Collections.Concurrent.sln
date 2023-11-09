@@ -11,14 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Ac
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build-solution.yml = .github\workflows\build-solution.yml
 		.github\config.yml = .github\config.yml
+		.github\workflows\pull-request-checks.yml = .github\workflows\pull-request-checks.yml
 		.github\workflows\update-dependencies.yml = .github\workflows\update-dependencies.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{2D183775-1C9F-463C-908B-5765BC2BFFA3}"
 	ProjectSection(SolutionItems) = preProject
 		CCSWE.nanoFramework.Collections.Concurrent.nuspec = CCSWE.nanoFramework.Collections.Concurrent.nuspec
-		Directory.Build.props = Directory.Build.props
-		nuget.config = nuget.config
 		version.json = version.json
 	EndProjectSection
 EndProject
