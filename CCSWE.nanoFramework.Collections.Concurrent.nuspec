@@ -17,10 +17,10 @@
     <copyright>Copyright (c) Cory Charlton</copyright>
     <tags>nanoFramework C# csharp netmf netnf ccswe collections concurrent thread</tags>
     <dependencies>
-      <dependency id="CCSWE.nanoFramework.Core" version="0.2.7" />
-      <dependency id="nanoFramework.CoreLibrary" version="1.14.2" />
-      <dependency id="nanoFramework.System.Collections" version="1.5.18" />
-      <dependency id="nanoFramework.System.Text" version="1.2.37" />
+      <dependency id="CCSWE.nanoFramework.Core" version="0.2.15" />
+      <dependency id="nanoFramework.CoreLibrary" version="1.15.5" />
+      <dependency id="nanoFramework.System.Collections" version="1.5.31" />
+      <dependency id="nanoFramework.System.Text" version="1.2.54" />
     </dependencies>
   </metadata>
   <files>
