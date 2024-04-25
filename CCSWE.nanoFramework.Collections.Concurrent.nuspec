@@ -8,12 +8,13 @@
     <authors>Cory Charlton</authors>
     <owners>Cory Charlton,CCSWE</owners>
     <license type="file">LICENSE.md</license>
-    <projectUrl>https://github.com/CoryCharlton/CCSWE.nanoFramework.Collections.Concurrent</projectUrl>
+    <projectUrl>https://github.com/CCSWE-nanoFramework/CCSWE.nanoFramework.Collections.Concurrent</projectUrl>
+    <icon>images\ccswe-logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <readme>README.md</readme>
     <developmentDependency>false</developmentDependency>
     <description>Simple thread-safe collections.</description>
-    <repository type="git" url="https://github.com/CoryCharlton/CCSWE.nanoFramework.Collections.Concurrent" commit="$commit$" />
+    <repository type="git" url="https://github.com/CCSWE-nanoFramework/CCSWE.nanoFramework.Collections.Concurrent" commit="$commit$" />
     <copyright>Copyright (c) Cory Charlton</copyright>
     <tags>nanoFramework C# csharp netmf netnf ccswe collections concurrent thread</tags>
     <dependencies>
@@ -25,6 +26,7 @@
   </metadata>
   <files>
     <file src="CCSWE.nanoFramework.Collections.Concurrent\bin\Release\CCSWE.nanoFramework.Collections.Concurrent.*" target="lib" />
+    <file src="ccswe-logo.png" target="images" />
     <file src="LICENSE.md" target="" />
     <file src="README.md" target="" />
   </files>
