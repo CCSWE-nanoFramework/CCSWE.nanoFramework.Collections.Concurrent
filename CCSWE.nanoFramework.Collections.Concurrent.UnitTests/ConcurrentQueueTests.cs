@@ -1,5 +1,5 @@
+using CCSWE.nanoFramework.Collections.Concurrent.UnitTests.Mocks;
 using nanoFramework.TestFramework;
-using System;
 
 namespace CCSWE.nanoFramework.Collections.Concurrent.UnitTests
 {
@@ -12,9 +12,8 @@ namespace CCSWE.nanoFramework.Collections.Concurrent.UnitTests
         [TestMethod]
         public void Clear_should_remove_all_items()
         {
-            // Arrange
-            var create = 10;
-            var expected = 0;
+            const int create = 10;
+            const int expected = 0;
             var sut = new ConcurrentQueue();
 
             for (var i = 0; i < create; i++)
@@ -22,80 +21,67 @@ namespace CCSWE.nanoFramework.Collections.Concurrent.UnitTests
                 sut.Enqueue(i);
             }
 
-            // Act
             sut.Clear();
 
-            // Assert
             Assert.AreEqual(expected, sut.Count);
         }
 
         [TestMethod]
         public void Contains_should_return_false_for_null()
         {
-            // Arrange
-            var expected = 10;
+            const int create = 10;
             var sut = new ConcurrentQueue();
 
-            for (var i = 0; i < expected; i++)
+            for (var i = 0; i < create; i++)
             {
                 sut.Enqueue(i);
             }
 
-            // Act
-            var contains = sut.Contains(null);
-
-            // Assert
-            Assert.IsFalse(contains);
+            Assert.IsFalse(sut.Contains(null!));
         }
 
         [TestMethod]
         public void Contains_should_return_true()
         {
-            // Arrange
-            var expected = 10;
+            const int create = 10;
             var sut = new ConcurrentQueue();
 
-            for (var i = 0; i < expected; i++)
+            for (var i = 0; i < create; i++)
             {
                 sut.Enqueue(i);
             }
 
-            // Act
-            var contains = sut.Contains(0);
-
-            // Assert
-            Assert.IsTrue(contains);
+            for (var i = 0; i < create; i++)
+            {
+                Assert.IsTrue(sut.Contains(i));
+            }
         }
 
         [TestMethod]
         public void Count_should_return_correct_value()
         {
-            // Arrange
-            var expected = 10;
+            const int create = 10;
             var sut = new ConcurrentQueue();
 
-            // Act
-            for (var i = 0; i < expected; i++)
+            for (var i = 0; i < create; i++)
             {
                 sut.Enqueue(i);
+                Assert.AreEqual(i + 1, sut.Count);
             }
-
-            // Assert
-            Assert.AreEqual(expected, sut.Count);
         }
 
         [TestMethod]
         public void Dequeue_should_remove_item()
         {
-            // Arrange
-            var expected = new object();
+            var expected = new MockItem();
             var sut = new ConcurrentQueue();
+
             sut.Enqueue(expected);
 
-            // Act
+            Assert.AreEqual(1, sut.Count);
+
             var actual = sut.Dequeue();
 
-            // Assert
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(0, sut.Count);
         }
@@ -103,42 +89,34 @@ namespace CCSWE.nanoFramework.Collections.Concurrent.UnitTests
         [TestMethod]
         public void Enqueue_should_add_item()
         {
-            // Arrange
-            var expected = new object();
+            var expected = new MockItem();
             var sut = new ConcurrentQueue();
 
-            // Act
             sut.Enqueue(expected);
 
-            // Assert
             Assert.AreEqual(1, sut.Count);
         }
 
         [TestMethod]
         public void IsSynchronized_should_be_true()
         {
-            // Arrange
+            // ReSharper disable once CollectionNeverUpdated.Local
             var sut = new ConcurrentQueue();
 
-            // Act
-
-
-            // Assert
             Assert.IsTrue(sut.IsSynchronized);
         }
 
         [TestMethod]
         public void Peek_should_not_remove_item()
         {
-            // Arrange
-            var expected = new object();
+            var expected = new MockItem();
             var sut = new ConcurrentQueue();
             sut.Enqueue(expected);
 
-            // Act
+            Assert.AreEqual(1, sut.Count);
+
             var actual = sut.Peek();
 
-            // Assert
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(1, sut.Count);
         }
@@ -146,15 +124,13 @@ namespace CCSWE.nanoFramework.Collections.Concurrent.UnitTests
         [TestMethod]
         public void TryDequeue_should_return_false()
         {
-            // Arrange
-            var expected = new object();
+            var expected = new MockItem();
             var sut = new ConcurrentQueue();
 
-            // Act
             var result = sut.TryDequeue(out var actual);
 
-            // Assert
             Assert.IsFalse(result);
+            Assert.IsNull(actual);
             Assert.AreNotEqual(expected, actual);
             Assert.AreEqual(0, sut.Count);
         }
@@ -162,12 +138,10 @@ namespace CCSWE.nanoFramework.Collections.Concurrent.UnitTests
         [TestMethod]
         public void TryDequeue_should_return_true()
         {
-            // Arrange
-            var expected = new object();
+            var expected = new MockItem();
             var sut = new ConcurrentQueue();
             sut.Enqueue(expected);
 
-            // Act
             var result = sut.TryDequeue(out var actual);
 
             // Assert
