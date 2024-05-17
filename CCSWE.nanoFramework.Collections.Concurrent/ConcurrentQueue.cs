@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 namespace CCSWE.nanoFramework.Collections.Concurrent
@@ -7,7 +8,7 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
     // TODO: I might want to move most of this logic to a base class so creating strongly typed variants is trivial
 
     /// <summary>
-    /// A thread-safe implementation of a queue.
+    /// A thread-safe implementation of a <see cref="Queue"/>.
     /// </summary>
     /// <remarks>
     /// This is a brute force implementation using lock().
@@ -20,7 +21,7 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         private readonly Queue _queue;
 
         /// <summary>
-        /// Initializes a new instance of the ConcurrentQueue class that is empty, has the default initial capacity, and uses the default growth factor (2x).
+        /// Initializes a new instance of the <see cref="ConcurrentQueue"/> class that is empty, has the default initial capacity, and uses the default growth factor (2x).
         /// </summary>
         public ConcurrentQueue(): this(new Queue())
         {
@@ -33,7 +34,7 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the ConcurrentQueue.
+        /// Gets the number of elements contained in the <see cref="ConcurrentQueue"/>.
         /// </summary>
         public int Count
         {
@@ -47,13 +48,13 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Gets a value indicating whether access to the ConcurrentQueue is synchronized (thread safe).
+        /// Gets a value indicating whether access to the <see cref="ConcurrentQueue"/> is synchronized (thread safe).
         /// Always return true.
         /// </summary>
         public bool IsSynchronized => true;
 
         /// <summary>
-        /// Gets an object that can be used to synchronize access to the ConcurrentQueue.
+        /// Gets an object that can be used to synchronize access to the <see cref="ConcurrentQueue"/>.
         /// </summary>
         /// <remarks>
         /// All calls are already synchronized so callers do not need to use this.
@@ -61,7 +62,7 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         public object SyncRoot => this;
 
         /// <summary>
-        /// Removes all objects from the ConcurrentQueue.
+        /// Removes all objects from the <see cref="ConcurrentQueue"/>.
         /// </summary>
         public void Clear()
         {
@@ -72,10 +73,10 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Creates a shallow copy of the ConcurrentQueue.
+        /// Creates a shallow copy of the <see cref="ConcurrentQueue"/>.
         /// </summary>
         /// <returns>
-        /// A shallow copy of the ConcurrentQueue.
+        /// A shallow copy of the <see cref="ConcurrentQueue"/>.
         /// </returns>
         public object Clone()
         {
@@ -86,10 +87,10 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Determines whether an element is in the ConcurrentQueue.
+        /// Determines whether an element is in the <see cref="ConcurrentQueue"/>.
         /// </summary>
-        /// <param name="item">The object to locate in the ConcurrentQueue.</param>
-        /// <returns>true if obj is found in the ConcurrentQueue; otherwise, false.</returns>
+        /// <param name="item">The object to locate in the <see cref="ConcurrentQueue"/>.</param>
+        /// <returns>true if <paramref name="item"/> is found in the <see cref="ConcurrentQueue"/>; otherwise, false.</returns>
         public bool Contains(object item)
         {
             if (item is null)
@@ -104,9 +105,9 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Copies the ConcurrentQueue elements to an existing one-dimensional Array, starting at the specified array index.
+        /// Copies the <see cref="ConcurrentQueue"/> elements to an existing one-dimensional Array, starting at the specified array index.
         /// </summary>
-        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from ConcurrentQueue.</param>
+        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ConcurrentQueue"/>.</param>
         /// <param name="index">The zero-based index in array at which copying begins.</param>
         public void CopyTo(Array array, int index)
         {
@@ -117,9 +118,9 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Removes and returns the object at the beginning of the ConcurrentQueue.
+        /// Removes and returns the object at the beginning of the <see cref="ConcurrentQueue"/>.
         /// </summary>
-        /// <returns>The object that is removed from the beginning of the ConcurrentQueue.</returns>
+        /// <returns>The object that is removed from the beginning of the <see cref="ConcurrentQueue"/>.</returns>
         public object Dequeue()
         {
             lock (_lock)
@@ -128,12 +129,12 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
             }
         }
 
-        /// <summary>Adds an object to the end of the ConcurrentQueue.</summary>
-        /// <param name="item">The object to add to the ConcurrentQueue.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <summary>Adds an object to the end of the <see cref="ConcurrentQueue"/>.</summary>
+        /// <param name="item">The object to add to the <see cref="ConcurrentQueue"/>.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="item"/> is <c>null</c>.</exception>
         public void Enqueue(object item)
         {
-            Ensure.IsNotNull(nameof(item), item);
+            Ensure.IsNotNull(item);
 
             lock (_lock)
             {
@@ -142,9 +143,9 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the ConcurrentQueue.
+        /// Returns an enumerator that iterates through the <see cref="ConcurrentQueue"/>.
         /// </summary>
-        /// <returns>An IEnumerator for the ConcurrentQueue.</returns>
+        /// <returns>An IEnumerator for the <see cref="ConcurrentQueue"/>.</returns>
         public IEnumerator GetEnumerator()
         {
             lock (_lock)
@@ -154,9 +155,9 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Returns the object at the beginning of the ConcurrentQueue without removing it.
+        /// Returns the object at the beginning of the <see cref="ConcurrentQueue"/> without removing it.
         /// </summary>
-        /// <returns>The object at the beginning of the ConcurrentQueue.</returns>
+        /// <returns>The object at the beginning of the <see cref="ConcurrentQueue"/>.</returns>
         public object Peek()
         {
             lock (_lock)
@@ -166,11 +167,11 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Copies the ConcurrentQueue elements to a new array. The order of the elements in the new
-        /// array is the same as the order of the elements from the beginning of the ConcurrentQueue
+        /// Copies the <see cref="ConcurrentQueue"/> elements to a new array. The order of the elements in the new
+        /// array is the same as the order of the elements from the beginning of the <see cref="ConcurrentQueue"/>
         /// to its end.
         /// </summary>
-        /// <returns>A new array containing elements copied from the ConcurrentQueue.</returns>
+        /// <returns>A new array containing elements copied from the <see cref="ConcurrentQueue"/>.</returns>
         public object[] ToArray()
         {
             lock (_lock)
@@ -180,10 +181,10 @@ namespace CCSWE.nanoFramework.Collections.Concurrent
         }
 
         /// <summary>
-        /// Attempts to remove the object at the beginning of the ConcurrentQueue.
+        /// Attempts to remove the object at the beginning of the <see cref="ConcurrentQueue"/>.
         /// </summary>
-        /// <returns>true if an object was removed from the beginning of the ConcurrentQueue; otherwise false</returns>
-        public bool TryDequeue(out object? item)
+        /// <returns>true if an object was removed from the beginning of the <see cref="ConcurrentQueue"/>; otherwise false</returns>
+        public bool TryDequeue([NotNullWhen(true)] out object? item)
         {
             lock (_lock)
             {
