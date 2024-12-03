@@ -10,9 +10,9 @@
       },
       "nanoFramework.TestFramework": {
         "type": "Direct",
-        "requested": "[3.0.44, 3.0.44]",
-        "resolved": "3.0.44",
-        "contentHash": "YfbcHYwOwQ9Gn2l2c8juRZ3MpKXftAQxBz/dSKCFtMefH22kg34EyZ1j5Q61pjal1BuQbQmgFRnz8n3baH0B9Q=="
+        "requested": "[3.0.47, 3.0.47]",
+        "resolved": "3.0.47",
+        "contentHash": "CpUrBWmxgw2Blp3nkMcI+aI21Kj0VeLc4NU28OiA9IHxUsX6WXe6ruDjw71Ff4mb9nuLT55C4wg4CpD7+Iaw0g=="
       }
     }
   }
